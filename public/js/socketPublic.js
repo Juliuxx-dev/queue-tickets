@@ -23,9 +23,21 @@ socket.on('lastTickets', function (data) {
 });
 
 function updateHTML(lastTickets) {
-  for (var index = 0; index <= lastTickets.length - 1; index++) {
-    const element = lastTickets[index];
-    lblTickets[index].text('Ticket ' + lastTickets[index].number);
-    lblDesks[index].text('Escritorio ' + lastTickets[index].desk);
+  if (!lastTickets.length) {
+    for (let index = 0; index < 4; index++) {
+      if (index === 0) {
+        lblTickets[0].text('Esperando...');
+        lblDesks[0].text('');
+      } else {
+        lblTickets[index].text('');
+        lblDesks[index].text('');
+      }
+    }
+  } else {
+    for (var index = 0; index < lastTickets.length; index++) {
+      lblTickets[index].text('Ticket ' + lastTickets[index].number);
+      lblDesks[index].text('Escritorio ' + lastTickets[index].desk);
+    }
   }
+
 }

@@ -43,4 +43,12 @@ io.on('connection', (client) => {
 
     }
   });
+
+  client.on('resetTickets', () => {
+    ticketControl.resetTickets();
+
+    client.broadcast.emit('lastTickets', {
+      lastTickets: ticketControl.lastTickets()
+    });
+  });
 });
